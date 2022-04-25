@@ -1,0 +1,16 @@
+Week-6
+
+Installing and Understanding Eucalyptus cloud –II
+
+a.	Understand the concepts of Walrus Storage controller and Storage Controller (CLC) and in backend Node Controller (NC)
+Ans- Walrus
+Walrus is also called “WS3” and is the storage service provided by Eucalyptus. The Storage Service provides simple storage functionality, which is exposed by ReSTful and Soap APIs. Walrus takes care of storing the virtual machine images, storing the snapshots and serving Files. As with all other public facing Services in Eucalyptus, these Services are based on the Amazon Web Services API.
+Containers in Walrus Storage are called „Buckets“ and they have to be unique across accounts, just like it is with Amazon Web Services (AWS). Some naming restrictions are:
+•	Containers can contain lowercase letters, numbers, periods (.), underscores (_), and dashes (-)
+•	Container Names must start with a number or letter
+•	The Length of a Name must be between 3 and 255 characters long
+•	It is not allowed to use an IP-Address as Name (e.g., 265.255.5.4)
+The Maximum File Size in a Walrus Container is 5 Terabytes and Files can either be public or private. If the Container should be deleted, a container must be empty, which means that all files have to be deleted prior to deleting the container. Files are identified via unique Keys represented by Uniform Resource Identifiers (URIs).
+Common Actions performed on the Walrus storage are the creation of containers, store data in containers, download data, and grant or deny permissions. These actions can be performed via the eSTful or SOAP Interfaces. The Walrus Storage distinguishes two major read options: consistent read or eventually consistent read. The later one is faster but might server inconsistent data whereas the first one might have higher latency but data is always consistent.
+Storage Controller
+The Storage Controller is comparable to the Elastic Block Storage (EBS) for Amazon Web Services. Elastic Block Storage is a fast storage for virtual Image Files. The Storage Controller takes care of the creation of persistent EBS devices. Block Storage Devices are typically provided over over the ATAoverEthernet or iSCSI protocol to the instances.

@@ -1,0 +1,45 @@
+Week-5
+
+Installing and Understanding Eucalyptus cloud -I
+
+a.	Install Eucalyptus cloud.
+	INSTALLATION OF EUCALYPTUS
+
+step 1:sudo apt install snapd 
+this command is only for 14,15 versions.
+
+
+step 2: sudo snap install eucalyptus-tools
+
+INSTALLATION OF CLOUD FOUNDRY:
+Try command:
+sudo snap install eucalyptus-console
+
+for cf package installation try:sudo apt install confluence.
+
+some cloud foundry commands:
+	1.cf -h or cf -help
+	- will get the verion,different commands,author. 
+
+link for other commands:
+
+
+b.	Understand the concepts of Cluster Controller, and Cloud Controller (CLC).
+
+Eucalyptus is comprised of several components: Cloud Controller, Walrus, Cluster Controller, Storage Controller, and Node Controller. Each component is a stand-alone web service. This architecture allows Eucalyptus both to expose each web service as a well-defined, language-agnostic API, and to support existing web service standards for secure communication between its components.
+
+Cloud Controller
+The Cloud Controller – also known as CLC – is the highest level in Eucalyptus. There is one Cloud Controller per infrastructure. The Cloud Controller is in charge of the following tasks:
+•	Connect to virtual instances via SSH
+•	Provide a Front end for the Web Services that are EC2 and S3 compatible
+•	The Cloud Controller acts as a Meta Scheduler for the Cloud Infrastructure and determines which infrastructure to use.
+•	The Cloud Controller collects resource information from Cluster Controllers. The Cloud Controller runs per default on same machine as Walrus und the Storage Controller.
+
+•	The Cloud Controller (CLC) is the entry-point into the cloud for administrators, developers, project managers, and end-users. The CLC queries other components for information about resources, makes high-level scheduling decisions, and makes requests to the Cluster Controllers (CCs). As the interface to the management platform, the CLC is responsible for exposing and managing the underlying virtualized resources
+
+
+
+ 
+
+Cluster Controller
+The Cluster Controller (CC) comes next in hierarchy after the Cloud Controller (CLC). There is exactly one Cluster Controller per location. A location could be compared to an Availability Zone within a Region in Amazon Web Services. The Cluster Controller is basically in charge of receiving requests from the Cloud Controller to deploy new virtual Instances. The Cluster Controller decides which Node is used for the new virtual Instance. The Cluster Controller also maintains virtual Networks available to the instances and collects information about the Node Controllers registered. This information is reported to the Cloud Controller. Each Cluster can have exactly one Cluster Controller. When a new Instance is started, the Cloud Controller is instructed with the Image, Instance Type and Instance Number. The Cloud Controller looks up a Cluster Controller with enough available resources and selects one to start the instance. The Cloud Controller now itself looks up Node Controllers with enough resource availability and instructs the Node Controller to launch a new virtual Instance. If the Image requested is not available on the Node, the Node Controller looks up the Image by asking the Cloud Controller. The Cloud Controller now provides the Image via Walrus to the Node.
